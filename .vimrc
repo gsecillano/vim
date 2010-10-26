@@ -121,3 +121,4 @@ function! s:RunShellCommand(cmdline)
 endfunction
 
 nnoremap <leader>z :Shell 
+nnoremap <leader>j :Shell jruby %<cr>
