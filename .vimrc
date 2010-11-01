@@ -94,6 +94,7 @@ nnoremap <leader>t :CommandT<cr>
 nnoremap <silent> <leader>pe :! p4 edit `cygpath -am %`<cr>
 nnoremap <silent> <leader>pa :! p4 add `cygpath -am %`<cr>
 nnoremap <silent> <leader>pr :! p4 revert `cygpath -am %`<cr>
+nnoremap <silent> <leader>pp :! p4 print `cygpath -am %`<cr>
 
 set gfn=Bitstream\ Vera\ Sans\ Mono\ 9 
 color molokai
@@ -110,12 +111,15 @@ function! s:RunShellCommand(cmdline)
         let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
      endif
   endfor
-  botright new
+  tabnew
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   call setline(1, 'You entered:    ' . a:cmdline)
   call setline(2, 'Expanded Form:  ' .expanded_cmdline)
   call setline(3,substitute(getline(2),'.','=','g'))
-  execute '$read !'. expanded_cmdline
+  redir => message
+  execute '!'. expanded_cmdline
+  redir END
+  silent put=message
   setlocal nomodifiable
   1
 endfunction
