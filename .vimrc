@@ -126,3 +126,4 @@ endfunction
 
 nnoremap <leader>z :Shell 
 nnoremap <leader>j :Shell jruby %<cr>
+nnoremap <leader>T :Shell jruby -J-Xmx768m -J-XX:MaxPermSize=256m -I`cygpath -am ~/ruby7` -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
