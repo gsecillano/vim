@@ -95,6 +95,8 @@ nnoremap <silent> <leader>pe :! p4 edit `cygpath -am %`<cr>
 nnoremap <silent> <leader>pa :! p4 add `cygpath -am %`<cr>
 nnoremap <silent> <leader>pr :! p4 revert `cygpath -am %`<cr>
 nnoremap <silent> <leader>pp :! p4 print `cygpath -am %`<cr>
+nnoremap <silent> <leader>pd :P4diff<cr>
+nnoremap <silent> <leader>do :execute 'bdel ' . g:dfname<cr>:diffoff!<cr>:tabclose<cr>
 
 set gfn=Bitstream\ Vera\ Sans\ Mono\ 9 
 color molokai
@@ -112,7 +114,8 @@ function! s:RunShellCommand(cmdline)
      endif
   endfor
   tabnew
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  "setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile 
   call setline(1, 'You entered:    ' . a:cmdline)
   call setline(2, 'Expanded Form:  ' .expanded_cmdline)
   call setline(3,substitute(getline(2),'.','=','g'))
@@ -126,4 +129,26 @@ endfunction
 
 nnoremap <leader>z :Shell 
 nnoremap <leader>j :Shell jruby %<cr>
-nnoremap <leader>T :Shell jruby -J-Xmx768m -J-XX:MaxPermSize=256m -I`cygpath -am ~/ruby7` -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
+nnoremap <leader>T :Shell jruby -J-Xmx768m -J-XX:MaxPermSize=256m -I`cygpath -am ~/ruby` -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
+
+command! P4diff call P4diff()
+function! P4diff()
+  let g:fname = @%
+  echo g:fname
+  silent execute '!p4 print -q -o `cygpath -am /tmp/diff/%` `cygpath -am %`'
+  tabnew
+  execute 'edit ' . g:fname
+  let g:dfname = '/tmp/diff/' . g:fname
+  execute 'vertical diffsplit ' . g:dfname
+endfunction
+
+command! Puts call Puts()
+function! Puts()
+  let s:word = expand('<cword>')
+  let @s = 'puts "' . expand('%') .': ' . s:word . ' = #{' . s:word . '.inspect}"'
+  o
+
+  put s
+endfunction
+nnoremap <leader>l :Puts<cr>
+
