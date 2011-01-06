@@ -44,7 +44,7 @@ set textwidth=79
 set formatoptions=qrn1
 "set colorcolumn=85
 set list
-set listchars=tab:?\ ,eol:¬
+set listchars=tab:?\ ,eol:Â¬
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -91,10 +91,17 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader><tab> :Scratch<cr>
 nnoremap <leader>t :CommandT<cr>
 
-nnoremap <silent> <leader>pe :! p4 edit `cygpath -am %`<cr>
-nnoremap <silent> <leader>pa :! p4 add `cygpath -am %`<cr>
-nnoremap <silent> <leader>pr :! p4 revert `cygpath -am %`<cr>
-nnoremap <silent> <leader>pp :! p4 print `cygpath -am %`<cr>
+if has('win32unix')
+  nnoremap <silent> <leader>pe :! p4 edit `cygpath -am %`<cr>
+  nnoremap <silent> <leader>pa :! p4 add `cygpath -am %`<cr>
+  nnoremap <silent> <leader>pr :! p4 revert `cygpath -am %`<cr>
+  nnoremap <silent> <leader>pp :! p4 print `cygpath -am %`<cr>
+else
+  nnoremap <silent> <leader>pe :! p4 edit %<cr>
+  nnoremap <silent> <leader>pa :! p4 add %<cr>
+  nnoremap <silent> <leader>pr :! p4 revert %<cr>
+  nnoremap <silent> <leader>pp :! p4 print %<cr>
+endif
 nnoremap <silent> <leader>pd :P4diff<cr>
 nnoremap <silent> <leader>do :execute 'bdel ' . g:dfname<cr>:diffoff!<cr>:tabclose<cr>
 
@@ -135,7 +142,12 @@ command! P4diff call P4diff()
 function! P4diff()
   let g:fname = @%
   echo g:fname
-  silent execute '!p4 print -q -o `cygpath -am /tmp/diff/%` `cygpath -am %`'
+  if has('win32unix')
+    let s:printcmd = '!p4 print -q -o `cygpath -am /tmp/diff/%` `cygpath -am %`'
+  else
+    let s:printcmd = '!p4 print -q -o /tmp/diff/% %'
+  endif
+  silent execute s:printcmd
   tabnew
   execute 'edit ' . g:fname
   let g:dfname = '/tmp/diff/' . g:fname
