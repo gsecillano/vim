@@ -1,7 +1,9 @@
-syntax on
+"syntax on
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
+set lines=60
+set columns=180
 set modelines=0
 
 set tabstop=2
@@ -45,6 +47,7 @@ set formatoptions=qrn1
 "set colorcolumn=85
 set list
 set listchars=tab:?\ ,eol:¬
+set wildignorecase
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -98,9 +101,11 @@ if has('win32unix')
   nnoremap <silent> <leader>pp :! p4 print `cygpath -am %`<cr>
 else
   nnoremap <silent> <leader>pe :! p4 edit %<cr>
+  nnoremap <silent> <leader>pn :! p4 edit -c 3260867 %<cr>
   nnoremap <silent> <leader>pa :! p4 add %<cr>
   nnoremap <silent> <leader>pr :! p4 revert %<cr>
   nnoremap <silent> <leader>pp :! p4 print %<cr>
+  nnoremap <silent> <leader>pt :Shell p4 filelog %<cr>
 endif
 nnoremap <silent> <leader>pd :P4diff<cr>
 nnoremap <silent> <leader>do :execute 'bdel ' . g:dfname<cr>:diffoff!<cr>:tabclose<cr>
@@ -120,7 +125,8 @@ function! s:RunShellCommand(cmdline)
         let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
      endif
   endfor
-  tabnew
+  "tabnew
+  botright new
   "setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
   setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile 
   call setline(1, 'You entered:    ' . a:cmdline)
@@ -136,7 +142,7 @@ endfunction
 
 nnoremap <leader>z :Shell 
 nnoremap <leader>j :Shell jruby %<cr>
-nnoremap <leader>T :Shell jruby -J-Xmx768m -J-XX:MaxPermSize=256m -I`cygpath -am ~/ruby` -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
+nnoremap <leader>T :Shell jruby -J-Xmx768m -J-XX:MaxPermSize=256m -I $RUBY_SCRIPT_PATH -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
 
 command! P4diff call P4diff()
 function! P4diff()
