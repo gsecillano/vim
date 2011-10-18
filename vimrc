@@ -44,7 +44,7 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-"set colorcolumn=85
+set colorcolumn=85
 set list
 set listchars=tab:?\ ,eol:¬
 set wildignorecase
@@ -94,26 +94,14 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader><tab> :Scratch<cr>
 nnoremap <leader>t :CommandT<cr>
 
-if has('win32unix')
-  nnoremap <silent> <leader>pe :! p4 edit `cygpath -am %`<cr>
-  nnoremap <silent> <leader>pa :! p4 add `cygpath -am %`<cr>
-  nnoremap <silent> <leader>pr :! p4 revert `cygpath -am %`<cr>
-  nnoremap <silent> <leader>pp :! p4 print `cygpath -am %`<cr>
-else
-  nnoremap <silent> <leader>pe :! p4 edit %<cr>
-  nnoremap <silent> <leader>pn :! p4 edit -c $P4DONTCHECKIN %<cr>
-  nnoremap <silent> <leader>pa :! p4 add %<cr>
-  nnoremap <silent> <leader>pr :! p4 revert %<cr>
-  nnoremap <silent> <leader>pp :! p4 print %<cr>
-  nnoremap <silent> <leader>pt :Shell p4 filelog %<cr>
-endif
+nnoremap <silent> <leader>pe :! p4 edit %<cr>
+nnoremap <silent> <leader>pn :! p4 edit -c $P4DONTCHECKIN %<cr>
+nnoremap <silent> <leader>pa :! p4 add %<cr>
+nnoremap <silent> <leader>pr :! p4 revert %<cr>
+nnoremap <silent> <leader>pp :! p4 print %<cr>
+nnoremap <silent> <leader>pt :Shell p4 filelog %<cr>
 nnoremap <silent> <leader>pd :P4diff<cr>
 nnoremap <silent> <leader>do :execute 'bdel ' . g:dfname<cr>:diffoff!<cr>:tabclose<cr>
-
-set gfn=DejaVu\ Sans\ Mono\ 8 
-color molokai
-set guioptions-=m
-set guioptions-=T
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline)
