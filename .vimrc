@@ -1,4 +1,4 @@
-"syntax on
+syntax on
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
@@ -101,7 +101,7 @@ if has('win32unix')
   nnoremap <silent> <leader>pp :! p4 print `cygpath -am %`<cr>
 else
   nnoremap <silent> <leader>pe :! p4 edit %<cr>
-  nnoremap <silent> <leader>pn :! p4 edit -c 3260867 %<cr>
+  nnoremap <silent> <leader>pn :! p4 edit -c $P4DONTCHECKIN %<cr>
   nnoremap <silent> <leader>pa :! p4 add %<cr>
   nnoremap <silent> <leader>pr :! p4 revert %<cr>
   nnoremap <silent> <leader>pp :! p4 print %<cr>
@@ -110,7 +110,7 @@ endif
 nnoremap <silent> <leader>pd :P4diff<cr>
 nnoremap <silent> <leader>do :execute 'bdel ' . g:dfname<cr>:diffoff!<cr>:tabclose<cr>
 
-set gfn=Bitstream\ Vera\ Sans\ Mono\ 9 
+set gfn=DejaVu\ Sans\ Mono\ 8 
 color molokai
 set guioptions-=m
 set guioptions-=T
