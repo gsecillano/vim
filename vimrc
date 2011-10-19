@@ -130,7 +130,7 @@ endfunction
 
 nnoremap <leader>z :Shell 
 nnoremap <leader>j :Shell jruby %<cr>
-nnoremap <leader>T :Shell jruby -J-Xmx768m -J-XX:MaxPermSize=256m -I $RUBY_SCRIPT_PATH -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
+nnoremap <leader>T :Shell jruby -J-Xmx1300m -J-XX:MaxPermSize=256m -I $RUBY_SCRIPT_PATH -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
 
 command! P4diff call P4diff()
 function! P4diff()
