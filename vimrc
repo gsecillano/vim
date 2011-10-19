@@ -2,8 +2,8 @@ syntax on
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
-set lines=60
-set columns=180
+
+
 set modelines=0
 
 set tabstop=2
@@ -104,7 +104,7 @@ nnoremap <silent> <leader>pd :P4diff<cr>
 nnoremap <silent> <leader>do :execute 'bdel ' . g:dfname<cr>:diffoff!<cr>:tabclose<cr>
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
+function! g:RunShellCommand(cmdline)
   echo a:cmdline
   let expanded_cmdline = a:cmdline
   for part in split(a:cmdline, ' ')
@@ -158,3 +158,9 @@ function! Puts()
 endfunction
 nnoremap <leader>l :Puts<cr>
 
+" ruby test 
+let g:rubytest_cmd_test = "jruby %p"
+let g:rubytest_cmd_testcase = "jruby %p -n '/%c/'" 
+map <Leader>m <Plug>RubyTestRun
+map <Leader>n <Plug>RubyFileRun
+map <Leader>h <Plug>RubyTestRunLast

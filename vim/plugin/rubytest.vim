@@ -67,7 +67,9 @@ function s:ExecTest(cmd)
 
     let &efm = s:oldefm
   else
-    exe "!echo '" . a:cmd . "' && " . a:cmd
+    let c = a:cmd
+    call g:RunShellCommand(c)
+    "exe "!echo '" . a:cmd . "' && " . a:cmd
   endif
 endfunction
 
