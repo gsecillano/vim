@@ -94,16 +94,16 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader><tab> :Scratch<cr>
 nnoremap <leader>t :CommandT<cr>
 
-nnoremap <silent> <leader>pe :! p4 edit %<cr>
-nnoremap <silent> <leader>pn :! p4 edit -c $P4DONTCHECKIN %<cr>
-nnoremap <silent> <leader>pa :! p4 add %<cr>
-nnoremap <silent> <leader>pr :! p4 revert %<cr>
-nnoremap <silent> <leader>pp :! p4 print %<cr>
-nnoremap <silent> <leader>pt :Shell p4 filelog %<cr>
+nnoremap <silent> <leader>pe :! p4 edit $(readlink -f %)<cr>
+nnoremap <silent> <leader>pn :! p4 edit -c $P4DONTCHECKIN $(readlink -f %)<cr>
+nnoremap <silent> <leader>pa :! p4 add $(readlink -f %)<cr>
+nnoremap <silent> <leader>pr :! p4 revert $(readlink -f %)<cr>
+nnoremap <silent> <leader>pp :! p4 print $(readlink -f %)<cr>
+nnoremap <silent> <leader>pt :! p4 filelog $(readlink -f %)<cr>
 nnoremap <silent> <leader>pd :P4diff<cr>
 nnoremap <silent> <leader>do :execute 'bdel ' . g:dfname<cr>:diffoff!<cr>:tabclose<cr>
 
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+command! -complete=shellcmd -nargs=+ Shell call g:RunShellCommand(<q-args>)
 function! g:RunShellCommand(cmdline)
   echo a:cmdline
   let expanded_cmdline = a:cmdline
@@ -129,7 +129,7 @@ function! g:RunShellCommand(cmdline)
 endfunction
 
 nnoremap <leader>z :Shell 
-nnoremap <leader>j :Shell jruby %<cr>
+nnoremap <leader>j :Shell jruby -J-Xmx1024m -J-XX:MaxPermSize=512m %<cr>
 nnoremap <leader>T :Shell jruby -J-Xmx1300m -J-XX:MaxPermSize=256m -I $RUBY_SCRIPT_PATH -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
 
 command! P4diff call P4diff()
@@ -160,7 +160,7 @@ nnoremap <leader>l :Puts<cr>
 
 " ruby test 
 let g:rubytest_cmd_test = "jruby %p"
-let g:rubytest_cmd_testcase = "jruby %p -n '/%c/'" 
+let g:rubytest_cmd_testcase = "jruby -J-Xmx1024m -J-XX:MaxPermSize=512m %p -n '/%c/'" 
 map <Leader>m <Plug>RubyTestRun
 map <Leader>n <Plug>RubyFileRun
 map <Leader>h <Plug>RubyTestRunLast
