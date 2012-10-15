@@ -1,5 +1,5 @@
 syntax on
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 filetype plugin indent on
 
 
@@ -129,8 +129,8 @@ function! g:RunShellCommand(cmdline)
 endfunction
 
 nnoremap <leader>z :Shell 
-nnoremap <leader>j :Shell jruby -J-Xmx1024m -J-XX:MaxPermSize=512m %<cr>
-nnoremap <leader>T :Shell jruby -J-Xmx1300m -J-XX:MaxPermSize=256m -I $RUBY_SCRIPT_PATH -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
+nnoremap <leader>j :Shell jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %<cr>
+nnoremap <leader>T :Shell jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1300m -J-XX:MaxPermSize=256m -I $HOME/ruby -rfast_fail_runner test/all_tests.rb -v --runner=fastfail<cr>
 
 command! P4diff call P4diff()
 function! P4diff()
@@ -159,8 +159,17 @@ endfunction
 nnoremap <leader>l :Puts<cr>
 
 " ruby test 
-let g:rubytest_cmd_test = "jruby %p"
-let g:rubytest_cmd_testcase = "jruby -J-Xmx1024m -J-XX:MaxPermSize=512m %p -n '/%c/'" 
+"let g:rubytest_cmd_test = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p' 
+"let g:rubytest_cmd_testcase = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p -n '/%c/'' 
+let g:rubytest_cmd_test = 'ruby %p' 
+let g:rubytest_cmd_testcase = 'ruby %p -n "/%c/"' 
 map <Leader>m <Plug>RubyTestRun
 map <Leader>n <Plug>RubyFileRun
 map <Leader>h <Plug>RubyTestRunLast
+
+set backupdir=~/tmp/.vimbackup,/tmp
+set directory=~/tmp/.vimbackup,/tmp
+set undodir=~/tmp/.vimundo,/tmp
+silent execute '!mkdir -p ~/tmp/.vimbackup'
+silent execute '!mkdir -p ~/tmp/.vimundo'
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%{fugitive#statusline()}%{ruby_debugger#statusline()}%=%c,%l/%L\ %P
