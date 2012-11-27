@@ -3,7 +3,9 @@ set columns=180
 set modelines=0
 
 set gfn=DejaVu\ Sans\ Mono\ 8
-color molokai
+"color molokai
+set background=dark
+color solarized
 set guioptions-=m
 set guioptions-=T
 
