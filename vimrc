@@ -1,7 +1,14 @@
+set nocompatible
+filetype off
 syntax on
-call pathogen#infect()
-filetype plugin indent on
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'wincent/Command-T.git'
 
 
 set modelines=0
@@ -172,4 +179,4 @@ set directory=~/tmp/.vimbackup,/tmp
 set undodir=~/tmp/.vimundo,/tmp
 silent execute '!mkdir -p ~/tmp/.vimbackup'
 silent execute '!mkdir -p ~/tmp/.vimundo'
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%{fugitive#statusline()}%{ruby_debugger#statusline()}%=%c,%l/%L\ %P
+"set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%{fugitive#statusline()}%{ruby_debugger#statusline()}%=%c,%l/%L\ %P
