@@ -7,8 +7,20 @@ call vundle#rc()
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive.git'
+Bundle 'tpope/vim-surround.git'
 Bundle 'wincent/Command-T.git'
+Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'mileszs/ack.vim.git'
+Bundle 'vim-scripts/YankRing.vim.git'
+"Bundle ''
+"Bundle ''
+"Bundle ''
+"Bundle ''
+"Bundle ''
+
+filetype plugin indent on
 
 
 set modelines=0
