@@ -9,7 +9,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'tpope/vim-surround.git'
-Bundle 'wincent/Command-T.git'
+Bundle 'gsecillano/Command-T.git'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'mileszs/ack.vim.git'
