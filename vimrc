@@ -15,6 +15,7 @@ Bundle 'scrooloose/nerdtree.git'
 Bundle 'mileszs/ack.vim.git'
 Bundle 'vim-scripts/YankRing.vim.git'
 Bundle 'janx/vim-rubytest.git'
+Bundle 'bling/vim-airline'
 "Bundle ''
 "Bundle ''
 "Bundle ''
@@ -180,8 +181,9 @@ nnoremap <leader>l :Puts<cr>
 " ruby test 
 "let g:rubytest_cmd_test = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p' 
 "let g:rubytest_cmd_testcase = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p -n '/%c/'' 
-let g:rubytest_cmd_test = 'ruby %p' 
-let g:rubytest_cmd_testcase = 'ruby %p -n "/%c/"' 
+let g:rubytest_cmd_test = 'rvm ct19 do ruby -Itest %p' 
+let g:rubytest_cmd_testcase = 'rvm ct19 do ruby -Itest %p -n "/%c/"' 
+let g:rubytest_in_quickfix = 0
 map <Leader>m <Plug>RubyTestRun
 map <Leader>n <Plug>RubyFileRun
 map <Leader>h <Plug>RubyTestRunLast
