@@ -99,6 +99,7 @@ nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
 nnoremap <leader>q gqip
 
 nnoremap <leader>v V`]
+nnoremap <leader>g :Ack <cword> 
 
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>eg <C-w><C-v><C-l>:e ~/.gvimrc<cr>
@@ -181,8 +182,10 @@ nnoremap <leader>l :Puts<cr>
 " ruby test 
 "let g:rubytest_cmd_test = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p' 
 "let g:rubytest_cmd_testcase = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p -n '/%c/'' 
-let g:rubytest_cmd_test = 'rvm ct19 do ruby -Itest %p' 
-let g:rubytest_cmd_testcase = 'rvm ct19 do ruby -Itest %p -n "/%c/"' 
+"let g:rubytest_cmd_test = 'rvm ct19 do bundle exec ruby -Itest %p' 
+"let g:rubytest_cmd_testcase = 'rvm ct19 do bundle exec ruby -Itest %p -n "/%c/"' 
+let g:rubytest_cmd_test = 'rvm ct19 do zeus test %p' 
+let g:rubytest_cmd_testcase = 'rvm ct19 do zeus test %p:' . line('.')
 let g:rubytest_in_quickfix = 0
 map <Leader>m <Plug>RubyTestRun
 map <Leader>n <Plug>RubyFileRun
@@ -194,3 +197,6 @@ set undodir=~/tmp/.vimundo,/tmp
 silent execute '!mkdir -p ~/tmp/.vimbackup'
 silent execute '!mkdir -p ~/tmp/.vimundo'
 "set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%{fugitive#statusline()}%{ruby_debugger#statusline()}%=%c,%l/%L\ %P
+
+" Command-T
+let g:CommandTMaxFiles=12500
