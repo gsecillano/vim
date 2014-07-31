@@ -1,29 +1,31 @@
 set nocompatible
 filetype off
 syntax on
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'tpope/vim-surround.git'
-Bundle 'wincent/Command-T.git'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'mileszs/ack.vim.git'
 Bundle 'vim-scripts/YankRing.vim.git'
 Bundle 'janx/vim-rubytest.git'
+Bundle 'vim-scripts/Rainbow-Parenthesis.git'
+Plugin 'kien/ctrlp.vim'
 "Bundle ''
 "Bundle ''
 "Bundle ''
 "Bundle ''
+call vundle#end()
 
 filetype plugin indent on
 
 
-set modelines=0
+"set modelines=0
 
 set tabstop=2
 set shiftwidth=2
@@ -66,7 +68,6 @@ set formatoptions=qrn1
 set colorcolumn=85
 set list
 set listchars=tab:?\ ,eol:¬
-set wildignorecase
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -111,7 +112,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <leader><tab> :Scratch<cr>
-nnoremap <leader>t :CommandT<cr>
+nnoremap <leader>t :CtrlP<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 
 nnoremap <silent> <leader>pe :! p4 edit $(readlink -f %)<cr>
 nnoremap <silent> <leader>pn :! p4 edit -c $P4DONTCHECKIN $(readlink -f %)<cr>
