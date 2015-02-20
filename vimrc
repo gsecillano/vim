@@ -51,8 +51,8 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set relativenumber
-set undofile
+"set relativenumber
+"set undofile
 
 let mapleader = ","
 nnoremap / /\v
@@ -70,10 +70,10 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+"set colorcolumn=85
 set list
 set listchars=tab:?\ ,eol:¬
-set wildignorecase
+"set wildignorecase
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -196,7 +196,7 @@ map <Leader>h <Plug>RubyTestRunLast
 
 set backupdir=~/tmp/.vimbackup,/tmp
 set directory=~/tmp/.vimbackup,/tmp
-set undodir=~/tmp/.vimundo,/tmp
+"set undodir=~/tmp/.vimundo,/tmp
 silent execute '!mkdir -p ~/tmp/.vimbackup'
 silent execute '!mkdir -p ~/tmp/.vimundo'
 "set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%{fugitive#statusline()}%{ruby_debugger#statusline()}%=%c,%l/%L\ %P
