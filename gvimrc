@@ -2,7 +2,8 @@ set lines=60
 set columns=180
 set modelines=0
 
-set gfn=Consolas:h11
+set gfn=Droid\ Sans\ Mono:h10
+"set gfn=Consolas:h12
 "set gfn=DejaVu\ Sans\ Mono\:h11
 "set gfn=Menlo:h10
 "set gfn=Hermit\ Light:h12

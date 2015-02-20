@@ -1,25 +1,30 @@
 set nocompatible
 filetype off
 syntax on
+color molokai
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive.git'
-Bundle 'tpope/vim-surround.git'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'mileszs/ack.vim.git'
-Bundle 'vim-scripts/YankRing.vim.git'
-Bundle 'janx/vim-rubytest.git'
-Bundle 'vim-scripts/Rainbow-Parenthesis.git'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'tpope/vim-surround.git'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'scrooloose/syntastic'
+Plugin 'mileszs/ack.vim.git'
+Plugin 'alexaitken/vim-rubytest.git'
+Plugin 'vim-scripts/Rainbow-Parenthesis.git'
 Plugin 'kien/ctrlp.vim'
-"Bundle ''
-"Bundle ''
-"Bundle ''
-"Bundle ''
+Plugin 'vim-scripts/YankRing.vim.git'
+Plugin 'bling/vim-airline'
+Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'git@github.com:Shougo/vimshell.vim'
+Plugin 'git@github.com:Shougo/vimproc.vim'
+"Plugin ''
+"Plugin ''
+"Plugin ''
 call vundle#end()
 
 filetype plugin indent on
@@ -182,11 +187,13 @@ nnoremap <leader>l :Puts<cr>
 " ruby test 
 "let g:rubytest_cmd_test = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p' 
 "let g:rubytest_cmd_testcase = 'jruby -J-Djruby.loadService.indexing.enabled=true -J-Xmx1024m -J-XX:MaxPermSize=512m %p -n '/%c/'' 
-let g:rubytest_cmd_test = 'ruby %p' 
-let g:rubytest_cmd_testcase = 'ruby %p -n "/%c/"' 
+let g:rubytest_cmd_test = 'Shell rvm ruby-2.1.3 do zeus testrb %p' 
+let g:rubytest_cmd_testcase = 'Shell rvm ruby-2.1.3 do zeus testrb %p -n "/%c/"' 
 map <Leader>m <Plug>RubyTestRun
 map <Leader>n <Plug>RubyFileRun
 map <Leader>h <Plug>RubyTestRunLast
+"let g:rubytest_in_quickfix = 1
+
 
 set backupdir=~/tmp/.vimbackup,/tmp
 set directory=~/tmp/.vimbackup,/tmp
@@ -194,3 +201,15 @@ set undodir=~/tmp/.vimundo,/tmp
 silent execute '!mkdir -p ~/tmp/.vimbackup'
 silent execute '!mkdir -p ~/tmp/.vimundo'
 "set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%{fugitive#statusline()}%{ruby_debugger#statusline()}%=%c,%l/%L\ %P
+
+"CtrlP
+let g:ctrlp_working_path_mode = '0'
+
+" vertical diff
+set diffopt=filler,vertical
+
+"VimShell
+" Use current directory as vimshell prompt.
+let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
+let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
+
